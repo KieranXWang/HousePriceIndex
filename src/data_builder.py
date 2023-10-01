@@ -4,8 +4,8 @@ import time
 import csv
 from tqdm import tqdm
 
-from utils import get_project_root
-from redfin_utils import get_current_price
+from src.utils import get_project_root
+from src.redfin_utils import get_current_price
 
 
 root = get_project_root()
