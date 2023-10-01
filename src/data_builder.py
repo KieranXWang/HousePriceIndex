@@ -13,7 +13,7 @@ root = get_project_root()
 
 class DataBuilder:
     def __init__(self, realty_database_path: str = root + 'realty_database/seattle.csv',
-                 price_database_path: str = root + 'data/weekly/price_data.csv'):
+                 price_database_path: str = root + 'data/weekly/price_data.txt'):
         # timestamp
         self.timestamp = int(time.time())  # 10-digit epoch time
 
