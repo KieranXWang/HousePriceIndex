@@ -4,6 +4,7 @@ import re
 import json
 import bisect
 
+
 def get_project_root():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/'
 
@@ -86,4 +87,10 @@ def load_data_in_given_time_interval(file_path: str, start_time: datetime.dateti
             end_point = end_left_index
 
     return records[start_point:end_point+1]
+
+
+def convert_to_yearly_rate(rate: float, period: datetime.timedelta):
+    days = period.total_seconds() / 60 / 60 / 24
+    yearly_rate = (rate ** (1 / days)) ** 365
+    return yearly_rate
 

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import datetime
 
-from src.utils import load_data_in_given_time_interval, convert_timestamp_to_readable_format
+from src.utils import load_data_in_given_time_interval, convert_timestamp_to_readable_format, convert_to_yearly_rate
 
 
 def generate_time_schedule_epoch(start_time: float, end_time: float, interval: float):
@@ -81,9 +81,10 @@ def generate_index_list(records: list, start_time: datetime.datetime, end_time: 
 
 def generate_graph_basic(schedule_list: list, index_list: list):
     # compute yearly change
-    ##TODO: this is not correctly actually, improve yearly change conversion later
-    yearly_change = (index_list[-1] - index_list[0]) / (schedule_list[-1] - schedule_list[0]) * datetime.timedelta(
-        days=365).total_seconds()
+    rate = index_list[-1] / index_list[0]
+    period = datetime.timedelta(seconds=schedule_list[-1] - schedule_list[0])
+    yearly_rate = convert_to_yearly_rate(rate=rate, period=period)
+    yearly_change = yearly_rate - 1
 
     # create a figure and axis
     fig, ax = plt.subplots()
