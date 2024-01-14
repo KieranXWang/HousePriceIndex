@@ -47,5 +47,5 @@ class TestFuncConvertTimestampToText(unittest.TestCase):
     def test_func_case_0(self):
         dt = datetime.datetime(year=2023, month=10, day=1)
         ts = dt.timestamp()
-        txt = convert_timestamp_to_text(ts)
+        txt = convert_timestamp_to_readable_format(ts, show_hours=False)
         self.assertEqual('2023-10-01', txt)
