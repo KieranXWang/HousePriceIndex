@@ -2,6 +2,7 @@ import json
 import os.path
 import time
 import csv
+import warnings
 from tqdm import tqdm
 
 from src.utils import get_project_root, convert_timestamp_to_readable_format
@@ -44,8 +45,8 @@ class DataBuilder:
                 try:
                     price = int(get_current_price(address))
                     self.price_dict[address] = price
-                except:
-                    pass
+                except Exception as e:
+                    warnings.warn(f"Unable to fetch price data for {address}: {str(e)}")
                 pbar.update(1)
 
     def save_price_data(self):
