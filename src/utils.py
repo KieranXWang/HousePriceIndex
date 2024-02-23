@@ -46,10 +46,20 @@ def binary_search_find_interval(arr: list, target: float):
         return right_index, right_index
 
 
-def load_data_file_txt(file_path: str):
+def load_data_file_txt(file_path: str, remove_invalid_price: bool = True):
     with open(file_path, 'r') as f:
         lines = f.readlines()
         records = [json.loads(line) for line in lines]
+
+    if remove_invalid_price:
+        for record in records:
+            address_to_remove = []
+            price_data = record['price_data']
+            for address in price_data:
+                if not isinstance(price_data[address], int):
+                    address_to_remove.append(address)
+            for address in address_to_remove:
+                del price_data[address]
 
     return records
 
